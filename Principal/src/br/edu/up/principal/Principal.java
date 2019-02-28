@@ -35,7 +35,7 @@ public class Principal {
 			troco = valor_pag - valor;
 		}
 		
-		String res = String.format("%.2f", troco);
+		String res = String.format("%.2f", troco); // comando para limitar a quantidade de casas decimais
 		if(troco < 0) {
 			String resN = String.format("%.2f", troco*-1);
 			System.out.println("\nEstá faltando: R$ "+ resN);
@@ -48,18 +48,17 @@ public class Principal {
 
 	}
 	
-	public static boolean comprarOutroItem() {
+	public static int comprarOutroItem() {
 		int op = -1;
 		System.out.println("Deseja comprar outro Item?");
 		System.out.println("1 - Sim.");
 		System.out.println("0 - Não.");
 		System.out.print("Opção: ");
 		op = ler.nextInt();
-		if(op == 1) {
-			return true;
-		}else {
-			return false;
+		if(op < 0 || op > 1) {
+			comprarOutroItem();
 		}
+		return op;
 	}
 	
 	public static void menuPrincipal(double valor) {
@@ -79,7 +78,7 @@ public class Principal {
 			case 1:
 				qnt = perguntaQNT("Café");
 				valor += 1 * qnt;
-				if(comprarOutroItem()) {
+				if(comprarOutroItem() == 1) {
 					menuPrincipal(valor);
 				}
 				verificaTroco(valor);
@@ -90,7 +89,7 @@ public class Principal {
 			case 2:
 				qnt = perguntaQNT("Café c/ Leite");
 				valor += 3 * qnt;
-				if(comprarOutroItem()) {
+				if(comprarOutroItem() == 1) {
 					menuPrincipal(valor);
 				}
 				verificaTroco(valor);
@@ -101,7 +100,7 @@ public class Principal {
 			case 3:
 				qnt = perguntaQNT("Chocolate");
 				valor += 3.5 * qnt;
-				if(comprarOutroItem()) {
+				if(comprarOutroItem() == 1) {
 					menuPrincipal(valor);
 				}
 				verificaTroco(valor);
@@ -112,7 +111,7 @@ public class Principal {
 			case 4:
 				qnt = perguntaQNT("Leite");
 				valor += 1.5 * qnt;
-				if(comprarOutroItem()) {
+				if(comprarOutroItem() == 1) {
 					menuPrincipal(valor);
 				}
 				verificaTroco(valor);
