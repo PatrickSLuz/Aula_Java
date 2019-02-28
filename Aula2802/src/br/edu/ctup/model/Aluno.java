@@ -4,6 +4,10 @@ import java.util.Date;
 
 public class Aluno {
 
+	//public - visivel para todos os pacotes.
+	//private - visivel somente na clase onde foi criado.
+	//protected - visivel somente ao pacote one esta.
+	
 	private String nome;
 	private String endereco;
 	private String email;
@@ -12,6 +16,7 @@ public class Aluno {
 	private long cpf;
 	private int matricula;
 
+	//encapsular - encapsulamento | Get e Set.
 	public String getNome() {
 		return nome;
 	}
