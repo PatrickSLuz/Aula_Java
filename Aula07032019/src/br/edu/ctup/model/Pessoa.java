@@ -29,6 +29,7 @@ public class Pessoa {
 				"Altura: " + this.altura  + "\n";
 	}
 	
+	//calcular idade apartir da data de nascimento
 	public int calculaIdade(){
 		int idade=0;
 		while(2019 != this.anoNasc) {
