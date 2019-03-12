@@ -54,8 +54,7 @@ public class Livro {
 	}
 		
 	 public double calculaPrecoFinal() {
-		 double preco_final = this.preco * 1.2;
-		 return preco_final; 
+		 return this.preco * 1.2; 
 	 }
 	 
 	 public void pesqLivro(ArrayList<Livro> lv, String nome_livro) {
@@ -73,13 +72,15 @@ public class Livro {
 	 }
 	
 	 public String toString() {
+		 String preco = String.format("%.2f", this.preco);
+		 String preco_final = String.format("%.2f", calculaPrecoFinal());
 		 return "\n=================================\n" +
 				"Nome do Livro: " + this.nome + "\n" +
 				"Autor: " + this.autor + "\n" +
 				"Número de Exemplares: " + this.num_exemplares + "\n" +
-				"Preço: " + this.preco + "\n" +
+				"Preço: R$ " + preco + "\n" +
 				"Editora: " + this.editora + "\n" +
-				"Preço Final: " + calculaPrecoFinal() +
+				"Preço Final: R$ " + preco_final +
 				"\n=================================\n";
 	 }
 	
