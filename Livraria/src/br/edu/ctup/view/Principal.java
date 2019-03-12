@@ -3,22 +3,24 @@ package br.edu.ctup.view;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import br.edu.ctup.model.Endereco;
 import br.edu.ctup.model.Livro;
 import br.edu.ctup.model.Pessoa;
 
 public class Principal {
-	
-	static Scanner ler = new Scanner(System.in);
 	
 	static Livro livro = new Livro();
 	static ArrayList<Livro> array_livro = new ArrayList<Livro>();
 	
 	static Pessoa pessoa = new Pessoa();
 	static ArrayList<Pessoa> array_pessoa = new ArrayList<Pessoa>();
+	
+	static Endereco endereco = new Endereco();
+	static ArrayList<Endereco> array_endereco = new ArrayList<Endereco>();
 
 	static String lixo;// para "limpar" o buffer do teclado - le o enter
 	
-	public static void cadLivro() {
+	public static void cadLivro(Scanner ler) {
 		lixo = ler.nextLine();// para "limpar" o buffer do teclado - le o enter
 		System.out.println("\n=== Cadastro de Livro ===");
 		System.out.print("Digite o nome: ");
@@ -42,7 +44,7 @@ public class Principal {
 		}
 	}
 	
-	public static void pesqLivro() {
+	public static void pesqLivro(Scanner ler) {
 		lixo = ler.nextLine();// para "limpar" o buffer do teclado - le o enter
 		System.out.println("\n==== Pesquisar Livros ====");
 		System.out.print("Digite o nome do Livro: ");
@@ -50,15 +52,26 @@ public class Principal {
 		livro.pesqLivro(array_livro, pesqNome);
 	}
 	
-	public static void cadCliente() {
+	public static void cadCliente(Scanner ler) {
 		 lixo = ler.nextLine();// para "limpar" o buffer do teclado - le o enter
 		 System.out.println("\n=== Cadastro de Cliente ===");
 		 System.out.print("Digite o nome: ");
 		 String nome = ler.nextLine();
 		 System.out.print("Digite o RG: ");
 		 String rg = ler.nextLine();
-		 System.out.print("Digite o Endereço: ");
-		 String endereco = ler.nextLine();
+		 
+		 System.out.println("Endereço: ");
+		 System.out.print("Digite a rua: ");
+		 String rua = ler.nextLine();
+		 endereco.setRua(rua);
+		 System.out.print("Digite o bairro: ");
+		 String bairro = ler.nextLine();
+		 endereco.setBairro(bairro);
+		 System.out.print("Digite o numero: ");
+		 int num = ler.nextInt();
+		 endereco.setNumero(num);
+		 
+		 lixo = ler.nextLine();// para "limpar" o buffer do teclado - le o enter
 		 System.out.print("Digite o Login: ");
 		 String login = ler.nextLine();
 		 System.out.print("Digite a senha: ");
@@ -66,14 +79,14 @@ public class Principal {
 		 array_pessoa.add(new Pessoa(nome, rg, endereco, login, senha));
 	}
 	
-	public static void verCliente() {
+	public static void verCliente(Scanner ler) {
 		System.out.println("\n=== Clientes Cadastrados ===");
 		for (Pessoa objPessoa : array_pessoa) {
 			System.out.print(objPessoa);
 		}
 	}
 	
-	public static void logar() {
+	public static void logar(Scanner ler) {
 		lixo = ler.nextLine();// para "limpar" o buffer do teclado - le o enter
 		System.out.println("\n========= Login =========");
 		System.out.print("Login: ");
@@ -87,7 +100,7 @@ public class Principal {
 		}
 	}
 	
-	public static void menuPrincipal() {
+	public static void menuPrincipal(Scanner ler) {
 		int op = -1;
 		while (op != 0) {
 			System.out.println("\n========== Menu ==========");
@@ -103,22 +116,22 @@ public class Principal {
 			
 			switch(opcao) {
 				case 1:
-					cadLivro();
+					cadLivro(ler);
 					break;
 				case 2:
 					verLivro();
 					break;
 				case 3:
-					pesqLivro();
+					pesqLivro(ler);
 					break;
 				case 4:
-					cadCliente();
+					cadCliente(ler);
 					break;
 				case 5:
-					verCliente();
+					verCliente(ler);
 					break;
 				case 6:
-					logar();
+					logar(ler);
 					break;
 				case 0:
 					op = 0;
@@ -133,7 +146,9 @@ public class Principal {
 	
 	public static void main(String[] args) {
 		
-		menuPrincipal();
+		Scanner ler = new Scanner(System.in);
+		
+		menuPrincipal(ler);
 		
 	}
 

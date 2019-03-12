@@ -6,11 +6,11 @@ public class Pessoa {
 	
 	private String nome;
 	private String rg;
-	private String endereco;
+	private Endereco endereco;
 	private String login;
 	private String senha;
 	
-	public Pessoa(String nome, String rg, String endereco, String login, String senha) {
+	public Pessoa(String nome, String rg, Endereco endereco, String login, String senha) {
 		this.nome = nome;
 		this.rg = rg;
 		this.endereco = endereco;
@@ -34,10 +34,10 @@ public class Pessoa {
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
-	public String getEndereco() {
+	public Endereco getEndereco() {
 		return endereco;
 	}
-	public void setEndereco(String endereco) {
+	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
 	public String getLogin() {
@@ -70,7 +70,7 @@ public class Pessoa {
 		return "\n=================================\n" +
 				"Nome: " + this.nome + "\n" +
 				"RG: " + this.rg + "\n" +
-				"Endereço: " + this.endereco + "\n" +
+				"Endereço: \n" + endereco + "\n" +
 				"Login: " + this.login +
 				"\n=================================\n";
 	}
