@@ -1,8 +1,6 @@
 package br.edu.ctup.model;
 
-import java.util.ArrayList;
-
-public class Pessoa {
+public class Cliente {
 	
 	private String nome;
 	private String rg;
@@ -10,7 +8,7 @@ public class Pessoa {
 	private String login;
 	private String senha;
 	
-	public Pessoa(String nome, String rg, Endereco endereco, String login, String senha) {
+	public Cliente(String nome, String rg, Endereco endereco, String login, String senha) {
 		this.nome = nome;
 		this.rg = rg;
 		this.endereco = endereco;
@@ -18,7 +16,7 @@ public class Pessoa {
 		this.senha = senha;
 	}
 	
-	public Pessoa() {
+	public Cliente() {
 		
 	}
 	
@@ -52,19 +50,6 @@ public class Pessoa {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
-	public String validarLogin(ArrayList<Pessoa> ps, String login, String senha){
-		boolean result = false;
-		 for (int i = 0; i < ps.size(); i++) {
-			 if(ps.get(i).login.equals(login) && ps.get(i).senha.equals(senha)) {
-				 i = ps.size() + 1;
-				 result =  true;
-			 }
-		 }
-		 return String.valueOf(result);
-
-	}
-	
 	
 	public String toString() {
 		return "\n=================================\n" +

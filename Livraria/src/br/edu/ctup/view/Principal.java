@@ -1,22 +1,25 @@
 package br.edu.ctup.view;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import br.edu.ctup.model.Endereco;
 import br.edu.ctup.model.Livro;
-import br.edu.ctup.model.Pessoa;
+import br.edu.ctup.controller.ControllerCliente;
+import br.edu.ctup.model.Cliente;
 
 public class Principal {
 	
 	static Livro livro = new Livro();
 	static ArrayList<Livro> array_livro = new ArrayList<Livro>();
 	
-	static Pessoa pessoa = new Pessoa();
-	static ArrayList<Pessoa> array_pessoa = new ArrayList<Pessoa>();
+	static Cliente pessoa = new Cliente();
 	
 	static Endereco endereco = new Endereco();
-	static ArrayList<Endereco> array_endereco = new ArrayList<Endereco>();
+	static List<Endereco> array_endereco = new ArrayList<Endereco>();
+	
+	static ControllerCliente controllerCliente = new ControllerCliente();
 
 	static String lixo;// para "limpar" o buffer do teclado - le o enter
 	
@@ -53,35 +56,42 @@ public class Principal {
 	}
 	
 	public static void cadCliente(Scanner ler) {
+		 pessoa = new Cliente();// criando um novo cliente para o cadastro
+		 
 		 lixo = ler.nextLine();// para "limpar" o buffer do teclado - le o enter
 		 System.out.println("\n=== Cadastro de Cliente ===");
+		 
 		 System.out.print("Digite o nome: ");
-		 String nome = ler.nextLine();
+		 pessoa.setNome(ler.nextLine());
+		 
 		 System.out.print("Digite o RG: ");
-		 String rg = ler.nextLine();
+		 pessoa.setRg(ler.nextLine());
 		 
 		 System.out.println("Endereço: ");
 		 System.out.print("Digite a rua: ");
-		 String rua = ler.nextLine();
-		 endereco.setRua(rua);
+		 endereco.setRua(ler.nextLine());
+		 
 		 System.out.print("Digite o bairro: ");
-		 String bairro = ler.nextLine();
-		 endereco.setBairro(bairro);
+		 endereco.setBairro(ler.nextLine());
+		 
 		 System.out.print("Digite o numero: ");
-		 int num = ler.nextInt();
-		 endereco.setNumero(num);
+		 endereco.setNumero(ler.nextInt());
 		 
 		 lixo = ler.nextLine();// para "limpar" o buffer do teclado - le o enter
 		 System.out.print("Digite o Login: ");
-		 String login = ler.nextLine();
+		 pessoa.setLogin(ler.nextLine());
+		 
 		 System.out.print("Digite a senha: ");
-		 String senha = ler.nextLine();
-		 array_pessoa.add(new Pessoa(nome, rg, endereco, login, senha));
+		 pessoa.setSenha(ler.nextLine());
+		 
+		 pessoa.setEndereco(endereco);
+		 
+		 controllerCliente.cadastrarCLiente(pessoa);
 	}
 	
 	public static void verCliente(Scanner ler) {
 		System.out.println("\n=== Clientes Cadastrados ===");
-		for (Pessoa objPessoa : array_pessoa) {
+		for (Cliente objPessoa : controllerCliente.listarClientes()) {
 			System.out.print(objPessoa);
 		}
 	}
@@ -93,23 +103,56 @@ public class Principal {
 		String login = ler.nextLine();
 		System.out.print("Senha: ");
 		String senha = ler.nextLine();
-		if(pessoa.validarLogin(array_pessoa, login, senha)=="true") {
+		
+		if(controllerCliente.autenticar(login, senha)) {
+			System.out.println("\nLogado com Sucesso!");
+			menuLogado(ler);
+		}else {
+			System.out.println("\nFalha no Login! Tente Novamente");
+		}
+		/*
+		if(pessoa.validarLogin(controllerCliente.listarClientes(), login, senha)=="true") {
 			System.out.println("\nLogado com Sucesso!");
 		}else {
 			System.out.println("\nFalha no Login! Tente Novamente");
 		}
+		*/
 	}
 	
-	public static void menuPrincipal(Scanner ler) {
+	public static void menu(Scanner ler) {
+		int op = -1;
+		while (op != 0) {
+			System.out.println("1 - Cadastrar Cliente.");
+			System.out.println("2 - Fazer Login.");
+			System.out.println("0 - Sair");
+			System.out.print("Opção: ");
+			int opcao = ler.nextInt();
+			switch(opcao){
+				case 1:
+					cadCliente(ler);
+					break;
+				case 2:
+					logar(ler);
+					op = 0;
+					break;
+				case 0:
+					op = 0;
+					break;
+				default:
+					System.out.println("\nOpção Inválida!\n");
+					break;	
+			}
+		}
+	}
+	
+	public static void menuLogado(Scanner ler) {
 		int op = -1;
 		while (op != 0) {
 			System.out.println("\n========== Menu ==========");
 			System.out.println("1 - Cadastrar um Livro.");
 			System.out.println("2 - Visualizar os Livros.");
 			System.out.println("3 - Pesquisar um Livro.");
-			System.out.println("4 - Cadastrar Cliente.");
-			System.out.println("5 - Visualizar os Clientes.");
-			System.out.println("6 - Fazer Login.");
+			System.out.println("4 - Visualizar os Clientes.");
 			System.out.println("0 - Sair");
 			System.out.print("Opção: ");
 			int opcao = ler.nextInt();
@@ -125,13 +168,7 @@ public class Principal {
 					pesqLivro(ler);
 					break;
 				case 4:
-					cadCliente(ler);
-					break;
-				case 5:
 					verCliente(ler);
-					break;
-				case 6:
-					logar(ler);
 					break;
 				case 0:
 					op = 0;
@@ -148,7 +185,7 @@ public class Principal {
 		
 		Scanner ler = new Scanner(System.in);
 		
-		menuPrincipal(ler);
+		menu(ler);
 		
 	}
 
