@@ -25,4 +25,9 @@ public class Cliente {
 		this.senha = senha;
 	}
 	
+	public String toString() {
+		return "\nNome: "+this.nome+"\n"+
+				"Login: "+this.login+"\n";
+	}
+	
 }
