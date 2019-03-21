@@ -2,10 +2,17 @@ package br.edu.ctup.model;
 
 public class Brinquedo {
 
+	private String nome;
 	private String descricao;
 	private double preco;
-	private int qnt;
+	private int estoque;
 	
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	public String getDescricao() {
 		return descricao;
 	}
@@ -18,11 +25,19 @@ public class Brinquedo {
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
-	public int getQnt() {
-		return qnt;
+	public int getEstoque() {
+		return estoque;
 	}
-	public void setQnt(int qnt) {
-		this.qnt = qnt;
+	public void setEstoque(int qnt) {
+		this.estoque = qnt;
+	}
+	
+	public String toString() {
+		String valor = String.format("%.2f", this.preco);
+		return "\nNome: "+this.nome+"\n"+
+				"Descricao: "+this.descricao+"\n"+
+				"Preço: R$ "+valor+"\n"+
+				"Estoque: "+this.estoque+"\n";
 	}
 	
 }
