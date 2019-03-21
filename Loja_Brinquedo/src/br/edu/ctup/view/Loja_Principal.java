@@ -55,7 +55,8 @@ public class Loja_Principal {
 			System.out.println("1 - Cadastrar Brinquedos.");
 			System.out.println("2 - Editar Brinquedos.");
 			System.out.println("3 - Visualizar Brinquedos.");
-			System.out.println("4 - Menu Cliente.");
+			System.out.println("4 - Buscar Brinquedos.");
+			System.out.println("5 - Menu Cliente.");
 			System.out.println("0 - Logout.");
 			System.out.print("Opção: ");
 			op = ler.nextInt();
@@ -67,10 +68,13 @@ public class Loja_Principal {
 				viewBrinquedo.editaBrinquedo();
 				break;
 			case 3:
-				//System.out.println(viewBrinquedo.controllerBrinquedo.mostrarTodosBrinquedos());
-				viewBrinquedo.controllerBrinquedo.mostrarTodosBrinquedos();
+				System.out.println(viewBrinquedo.controllerBrinquedo.mostrarTodosBrinquedos());
+				//viewBrinquedo.controllerBrinquedo.mostrarTodosBrinquedos();
 				break;
 			case 4:
+				viewBrinquedo.buscarBrinquedo();
+				break;
+			case 5:
 				viewCliente.menuCliente(indice);
 				break;
 			case 0:

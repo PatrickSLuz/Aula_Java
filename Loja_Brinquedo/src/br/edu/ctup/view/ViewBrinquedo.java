@@ -79,4 +79,15 @@ public class ViewBrinquedo {
 		
 	}
 	
+	public void buscarBrinquedo() {
+		lixoTeclado = ler.nextLine(); // variavel para ler o "enter" do teclado.
+		System.out.println("\n=== Buscar Brinquedo ===");
+		
+		System.out.print("Digite o Nome do Brinquedo:");
+		String nome_busca = ler.nextLine();
+	
+		System.out.println(controllerBrinquedo.buscaBrinquedo(nome_busca));
+		
+	}
+	
 }

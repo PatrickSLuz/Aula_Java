@@ -22,24 +22,25 @@ public class ControllerBrinquedo{
 			listBrinquedo.get(indice).setEstoque(brinquedo.getEstoque());
 		}
 	}
-	/*
-	public List<Brinquedo> mostrarTodosBrinquedos() {
-		return listBrinquedo;
-		
-	}
-*/
-	
-	public void mostrarTodosBrinquedos() {
+
+	public List<Brinquedo> buscaBrinquedo(String nome) {
+		List<Brinquedo> listBrinquedoBusca = new ArrayList<Brinquedo>(); // Criando uma lista para receber os itens da busca da lista principal.
 		for (int i = 0; i < listBrinquedo.size(); i++) {
-			System.out.println("\nID: "+i+"\n"+
-			"Nome: "+listBrinquedo.get(i).getNome()+"\n"+
-			"Descrição: "+listBrinquedo.get(i).getDescricao()+"\n"+
-			"Preço: R$ "+listBrinquedo.get(i).getPreco()+"\n"+
-			"Estoque: "+listBrinquedo.get(i).getEstoque()+"\n");
-			
-			
-			
+			if(listBrinquedo.get(i).getNome().equals(nome)) {
+				listBrinquedoBusca.add(listBrinquedo.get(i)); // lista de busca recebe um objeto da lista principal.
+			}
 		}
+		return listBrinquedoBusca;
+	}
+	
+	public List<Brinquedo> mostrarTodosBrinquedos() {
+		List<Brinquedo> listEstoquePositivo = new ArrayList<Brinquedo>();
+		for (int i = 0; i < listBrinquedo.size(); i++) {
+			if(listBrinquedo.get(i).getEstoque() > 0) {
+				listEstoquePositivo.add(listBrinquedo.get(i));
+			}
+		}
+		return listEstoquePositivo;
 	}
 	
 }
