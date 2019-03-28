@@ -5,7 +5,13 @@ package br.edu.ctup.model;
 public class Cliente extends Pessoa{
 
 	private long numCartaoSaude;
+
 	
+	//metodo Construtor vazio.
+	public Cliente() {
+		
+	}
+	//metodo Construtor.
 	public Cliente(String nome, long cpf) {
 		super(nome, cpf);
 	}
@@ -14,6 +20,8 @@ public class Cliente extends Pessoa{
 		super(nome, cpf);
 		this.numCartaoSaude = numCartaoSaude; 
 	}
+	
+	
 
 	public long getNumCartaoSaude() {
 		return numCartaoSaude;

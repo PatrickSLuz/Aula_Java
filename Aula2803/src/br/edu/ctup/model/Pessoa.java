@@ -7,10 +7,16 @@ public class Pessoa {
 	private int rg;
 	private String endereco;
 		
+	//metodo Construtor vazio.
+	public Pessoa() {
+		
+	}
+	//metodo Construtor.
 	public Pessoa(String nome, long cpf) {
 		this.nome = nome;
 		this.cpf = cpf;
 	}
+	
 	
 	public String getNome() {
 		return nome;

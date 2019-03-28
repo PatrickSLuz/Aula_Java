@@ -7,11 +7,13 @@ public class Funcionario extends Pessoa{
 
 	private long numCarteiraTrabalho;
 	
+	
 	//metodo Construtor.
-	public Funcionario(String nome, Long cpf, long numCarteiraTrabalho) {
+	public Funcionario(String nome, long cpf, long numCarteiraTrabalho) {
 		super(nome,cpf);
 		this.numCarteiraTrabalho = numCarteiraTrabalho;
 	}
+	
 	
 	public long getNumCarteiraTrabalho() {
 		return numCarteiraTrabalho;
