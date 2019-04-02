@@ -16,4 +16,9 @@ public class ContaEspecial extends ContaBancaria{
 		this.limite = limite;
 	}
 	
+	public String toString() {
+		return "== Conta Espcial =="+
+				"\nLimite: "+this.limite+"\n";
+	}
+	
 }

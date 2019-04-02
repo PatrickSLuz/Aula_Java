@@ -37,7 +37,8 @@ public class ContaBancaria {
 	
 	@Override
 	public String toString() {
-		return "\nNome: "+this.cliente+"\n"+
+		return "\n== Conta Bancaria ==\n"+
+				"Nome: "+this.cliente+"\n"+
 				"Conta: "+this.num_conta+"\n"+
 				"Saldo Atual: R$ "+this.saldo+"\n";
 	}
