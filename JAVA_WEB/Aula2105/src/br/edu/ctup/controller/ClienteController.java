@@ -23,7 +23,7 @@ public class ClienteController {
 		System.out.println("Nome: "+cliente.getNome());
 		ClienteDAOImpl clienteDAOImpl = new ClienteDAOImpl();
 		clienteDAOImpl.salvar(cliente);
-		FacesContext.getCurrentInstance().getExternalContext().redirect("Login.xhtml");
+		//FacesContext.getCurrentInstance().getExternalContext().redirect("Login.xhtml");
 	}
 	
 	public void listarTodos(){
@@ -38,6 +38,8 @@ public class ClienteController {
 		this.cliente = cliente;
 	}
 	public List<Cliente> getListaClientes() {
+		ClienteDAOImpl clienteDAOImpl = new ClienteDAOImpl();
+		listaClientes = clienteDAOImpl.listarTodos();
 		return listaClientes;
 	}
 	public void setListaClientes(List<Cliente> listaClientes) {
