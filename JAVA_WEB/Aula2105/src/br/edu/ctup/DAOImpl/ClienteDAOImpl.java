@@ -13,23 +13,48 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO{
 
 	Cliente cliente = new Cliente();
 	
+	EntityManager em;
+	
 	@Override
 	public void salvar(Cliente cliente) {
-		EntityManager em = getEntityManager(); // Pegando a conexão com o BD;
-		em.getTransaction().begin(); // Abre a transação com o BD;
-		em.persist(cliente); // Persiste um objeto no Banco;
-		em.getTransaction().commit(); // Confirma/Comita a execução anterior;
+		em = getEntityManager();
+		try {
+			if(cliente.getCodigo()==null) {
+				em.getTransaction().begin(); // Abre a transação com o BD;
+				em.persist(cliente); // Persiste um objeto no Banco;
+				em.getTransaction().commit(); // Confirma/Comita a execução anterior;
+			}else {
+				em.getTransaction().begin(); // Abre a transação com o BD;
+				em.merge(cliente); // Persiste um objeto no Banco;
+				em.getTransaction().commit(); // Confirma/Comita a execução anterior;
+			}
+		} catch(Exception e) {
+			e.getStackTrace();
+			em.getTransaction().rollback();
+		} finally {
+			em.close();
+		}
 	}
 
 	@Override
 	public void excluir(Integer codigo) {
-		// TODO Auto-generated method stub
-		
+		em = getEntityManager();
+		em.getTransaction().begin();
+		Cliente cli = em.find(Cliente.class, codigo); // faz uma busca no banco pelo codigo;
+		em.remove(cli);
+		em.getTransaction().commit();
 	}
+	
+	public Cliente editar(Integer codigo) {
+		em = getEntityManager();
+		return em.find(Cliente.class, codigo);
+	}
+	
 
 	@Override
 	public List<Cliente> listarTodos() {
-		EntityManager em = getEntityManager(); // Pegando a conexão com o BD;
+		em = getEntityManager();
+		em.getTransaction().begin();
 		Query q = em.createQuery("select object(c) from Cliente as c");
 		return q.getResultList();
 		
@@ -43,10 +68,8 @@ public class ClienteDAOImpl extends DAO implements ClienteDAO{
 
 	@Override
 	public Cliente autenticar(Cliente cliente) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
+		em = getEntityManager();
+		return em.find(Cliente.class, cliente.getLogin());
 
+	}
 }

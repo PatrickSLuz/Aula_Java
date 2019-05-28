@@ -13,21 +13,41 @@ public class ClienteController {
 	private Cliente cliente;
 	private List<Cliente> listaClientes;
 	
+	private ClienteDAOImpl clienteDAOImpl = new ClienteDAOImpl();
+	
 	public ClienteController(){
-		if (cliente == null) {
+		if (cliente == null) 
 			cliente = new Cliente();
-		}
  	}
 	
 	public void salvar() throws IOException {
-		System.out.println("Nome: "+cliente.getNome());
-		ClienteDAOImpl clienteDAOImpl = new ClienteDAOImpl();
 		clienteDAOImpl.salvar(cliente);
+		cliente = new Cliente(); // apos salvar um cliente ja instancia outro;
 		//FacesContext.getCurrentInstance().getExternalContext().redirect("Login.xhtml");
 	}
 	
+	public void excluir() {
+		// Pegando o paramentro do <f:param>;
+		Integer codigo = Integer.parseInt((String)FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigo")); 
+		clienteDAOImpl.excluir(codigo);
+	}
+	
+	public void editar() {
+		Integer codigo = Integer.parseInt((String)FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("codigo"));
+		cliente = clienteDAOImpl.editar(codigo);
+	}
+	
+	public void logar() {
+		System.out.println("Login DIGITADO\n"+cliente.getLogin()+cliente.getSenha());
+		Cliente clienteLogado = clienteDAOImpl.autenticar(cliente);
+		if(clienteLogado.getLogin().equals(cliente.getLogin()) && clienteLogado.getSenha().equals(cliente.getSenha())) {
+			System.out.println("Logado com Sucesso!");
+		}else {
+			System.out.println("Falha no login!");
+		}
+	}
+	
 	public void listarTodos(){
-		ClienteDAOImpl clienteDAOImpl = new ClienteDAOImpl();
 		listaClientes = clienteDAOImpl.listarTodos();
 	}
 	
@@ -38,7 +58,6 @@ public class ClienteController {
 		this.cliente = cliente;
 	}
 	public List<Cliente> getListaClientes() {
-		ClienteDAOImpl clienteDAOImpl = new ClienteDAOImpl();
 		listaClientes = clienteDAOImpl.listarTodos();
 		return listaClientes;
 	}

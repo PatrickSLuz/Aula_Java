@@ -14,13 +14,16 @@ xmlns:f="http://java.sun.com/jsf/core">
 	<h:form>
 		<h:panelGrid columns="2">	
 			<h:outputLabel value="Login: "/>
-			<h:inputText value="" />
+			<h:inputText name="login" value="#{clienteControllerBean.cliente.login}" />
 				
 			<h:outputLabel value="Senha: "/>
-			<h:inputSecret value="" />
+			<h:inputSecret name="senha" value="#{clienteControllerBean.cliente.senha}" />
 			
-			<h:commandButton value="Login" action="#{clienteControllerBean}"></h:commandButton>
+			<h:commandButton value="Login" action="#{clienteControllerBean.logar}"></h:commandButton>
 		</h:panelGrid>
+		
+		<h:commandLink action="CadastroCliente.xhtml">Fazer Cadastro</h:commandLink>
+		
 	</h:form>	
 		
 </h:body>

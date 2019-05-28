@@ -24,19 +24,34 @@ xmlns:f="http://java.sun.com/jsf/core">
 			
 			<h:commandButton value="Salvar" action="#{clienteControllerBean.salvar}"></h:commandButton>
 		</h:panelGrid>
+	
+	<h:commandLink action="Login.xhtml">Fazer Login</h:commandLink>
+	
+		<h:dataTable value="#{clienteControllerBean.listaClientes}" var="c" border="1" rendered="#{not empty clienteControllerBean.listaClientes}">
+			<h:column >
+				<f:facet name="header">Nome</f:facet>
+				<h:outputText value="#{c.nome}"></h:outputText>
+			</h:column>
+					
+			<h:column >
+				<f:facet name="header">Login</f:facet>
+				<h:outputText value="#{c.login}"></h:outputText>
+			</h:column>
+			
+			<h:column >
+				<f:facet name="header">Excluir</f:facet>
+				<h:commandLink value="Excluir" action="#{clienteControllerBean.excluir}">
+					<f:param name="codigo" value="#{c.codigo}"/>
+				</h:commandLink>
+			</h:column>
+			
+			<h:column >
+				<f:facet name="header">Editar</f:facet>
+				<h:commandLink value="#{c.nome}" action="#{clienteControllerBean.editar}">
+					<f:param name="codigo" value="#{c.codigo}"/>
+				</h:commandLink>
+			</h:column>
+		</h:dataTable>
 	</h:form>
-
-	<h:dataTable value="#{clienteControllerBean.listaClientes}" var="c" border="1" rendered="#{not empty clienteControllerBean.listaClientes}">
-		<h:column >
-			<f:facet name="header">Nome</f:facet>
-			<h:outputText value="#{c.nome}"></h:outputText>
-		</h:column>
-		
-		<h:column >
-			<f:facet name="header">Login</f:facet>
-			<h:outputText value="#{c.login}"></h:outputText>
-		</h:column>
-	</h:dataTable>
-
 </h:body>
 </html>
